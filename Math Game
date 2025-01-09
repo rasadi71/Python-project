@@ -1,0 +1,14 @@
+from random import randint
+from time import time
+# Generate a random number between 10 and 15 (inclusive)
+a=randint(12,25)
+b=randint(12,14)
+total=a+b
+system_time=time()
+print(f"{a} + {b} = ?")
+Answer=int(input("Answer= "))
+check= total == Answer
+user_time=time()
+print(f"{check}")
+difference=user_time-system_time
+print(f"time elapsed ={difference:.2}")
