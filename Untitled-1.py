@@ -1,10 +1,10 @@
 
 
-from PyPDF2 import PdfReader
-from googletrans import Translator
+from PyPDF2 import PdfReader #install the PyPDF2
+from googletrans import Translator #install googletrans
 
 # Open the PDF file in binary mode
-with open("Bangladesh.pdf", 'rb') as file:
+with open("Bangladesh.pdf", 'rb') as file: #pdf path
     reader = PdfReader(file)
 
     # Get total number of pages
@@ -19,7 +19,7 @@ with open("Bangladesh.pdf", 'rb') as file:
         text = page.extract_text()  # ✅ Use extract_text() instead of extractText()
 
         if text:  # Only translate if text is present
-            translated_text = translator.translate(text, src="en", dest="ar").text
+            translated_text = translator.translate(text, src="en", dest="ar").text #pdf language and pdf converted language
             translated_texts.append(translated_text)
 
 # Print the translated text
