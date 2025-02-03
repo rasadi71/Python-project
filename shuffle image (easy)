@@ -1,0 +1,11 @@
+from image_shuffler import Shuffler
+ 
+# Reading the image from local directory to
+# python environment
+img = Shuffler('kaka.jpg')
+ 
+# specifying the matrix to shuffle
+img.shuffle(matrix=(2, 2))
+ 
+# displaying and saving the shuffled image
+img.show() 
