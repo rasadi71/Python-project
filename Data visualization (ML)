@@ -1,0 +1,8 @@
+import pandas as pd
+import numpy as np
+ml_filepath = r"C:\Users\romal\OneDrive\Desktop\melb_data.csv"
+
+melb_data =pd.read_csv(ml_filepath)
+print(melb_data)
+melb_data.info()
+print(melb_data.describe())
