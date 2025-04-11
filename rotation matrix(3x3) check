@@ -1,21 +1,29 @@
 import numpy as np
-def is_rotation_matrix(R,tol=1e-5):
-    R= np.array(R)
- if R.shape !=(3,3):
-    return False
- should_be_identity=np.dot(R.T,R)
- identity=np.identity(3)
- if not np.allclose(should_be_identity,identity,atol=tol):
-     return False
-  if not np.isclose(np.linalg.det(R),1.0,atol=tol):
-    return False
 
-return True
+def is_rotation_matrix(R, tol=1e-5):
+    R = np.array(R)
+    
+    # Check if it's a 3x3 matrix
+    if R.shape != (3, 3):
+        return False
 
- R_valid = [
+    # Check if R^T * R == I (identity matrix)
+    should_be_identity = np.dot(R.T, R)
+    identity = np.identity(3)
+    if not np.allclose(should_be_identity, identity, atol=tol):
+        return False
+
+    # Check if determinant is close to +1
+    if not np.isclose(np.linalg.det(R), 1.0, atol=tol):
+        return False
+
+    return True
+
+# ✅ Example of a valid rotation matrix (90° rotation around Z-axis)
+R_valid = [
     [0, -1, 0],
     [1,  0, 0],
     [0,  0, 1]
- ]
+]
 
-print(is_rotation_matrix(R_valid))
+print(is_rotation_matrix(R_valid))  # Output: True
