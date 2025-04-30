@@ -1,0 +1,22 @@
+import fitz  # PyMuPDF
+import re
+
+doc = fitz.open(r"C:\Users\romal\Downloads\names_numbers_cities_ages.pdf")
+
+all_names = []
+
+for page in doc:
+    text = page.get_text()
+    
+    # Find all names (simple pattern)
+    names = re.findall(r'\b[A-Z][a-z]+\b', text)
+    
+    all_names.extend(names)
+
+doc.close()
+
+print("Extracted Names:")
+for name in all_names:
+    print(name)
+
+print(f"\nTotal names found: {len(all_names)}")
