@@ -1,0 +1,25 @@
+import fitz  # PyMuPDF
+import re    # Regular expression module
+
+# Open the PDF file
+doc = fitz.open(r"C:\Users\romal\Downloads\names_numbers_cities_ages.pdf")
+
+all_ages = []
+
+# Go through each page
+for page in doc:
+    text = page.get_text()
+    
+    # Find all numbers (10 digit numbers like phone numbers)
+    numbers = re.findall(r'\b\d{2}\b', text) # 2 /10 denote number of age will be extracted
+    
+    all_ages.extend(numbers)
+
+doc.close()
+
+# Now all_numbers has all the phone numbers extracted
+print("Extracted Numbers:")
+for num in all_ages:
+    print(num)
+
+print(f"\nTotal numbers found: {len(all_ages)}")
