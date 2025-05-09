@@ -1,0 +1,12 @@
+from bing_image_downloader import downloader
+import os
+
+# Create path for desktop folder
+desktop_path = os.path.join(os.path.expanduser("~"), "Desktop", "Cat_Images")
+
+# Create the folder if it doesn't exist
+os.makedirs(desktop_path, exist_ok=True)
+
+# Download images to the desktop folder
+downloader.download("cat", limit=10, output_dir=desktop_path, adult_filter_off=True)
+print(f"Images downloaded to '{desktop_path}' folder.")
