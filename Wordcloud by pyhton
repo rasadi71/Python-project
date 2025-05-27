@@ -38,5 +38,5 @@ plt.rcParams["figure.figsize"] = (10, 10)
 wordcloud = WordCloud(max_font_size=50, max_words=50, background_color="white", 
                       stopwords=new_stopwords, colormap="flag").generate_from_frequencies(word_freq)
 plt.imshow(wordcloud, interpolation="bilinear")
-plt.axis("off  ")
+plt.axis("off")
 plt.show()
