@@ -1,42 +1,18 @@
-from wordcloud import WordCloud, STOPWORDS
 import pandas as pd
-import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt 
+from wordcloud import WordCloud ,STOPWORDS
+import numpy as np
+from PIL import Image
+ 
+df=pd.read_csv(r"/home/rasadi/Desktop/real_trending_words.csv")
+flame_mask=np.array(Image.open(r"/home/rasadi/Desktop/myp.jpg"))
 
-# Load the CSV file
-try:
-    df = pd.read_csv(r"C:\Users\romal\OneDrive\Desktop\trending_words_this_week.csv") // file path
-    # For WSL2: df = pd.read_csv("/mnt/c/Users/romal/OneDrive/Desktop/trending_words_this_week.csv")
-except FileNotFoundError:
-    print("Error: CSV file not found. Please check the file path.")
-    exit()
-
-# Verify column names and data
-print("Column names:", df.columns.tolist())
-print("\nFirst 5 rows:\n", df.head())
-
-# Check if required columns exist
-if "word" not in df.columns or "frequency" not in df.columns:
-    print("Error: Required columns ('word', 'frequency') not found. Available columns:", df.columns.tolist())
-    exit()
-
-# Ensure "word" column is strings and "frequency" is numeric
-df["word"] = df["word"].astype(str)
-df["frequency"] = pd.to_numeric(df["frequency"], errors="coerce")
-
-# Create a dictionary of words and their frequencies
-word_freq = dict(zip(df["word"], df["frequency"]))
-
-# Set up stopwords
-stopwords = set(STOPWORDS)
-new_words = []  # Add custom words here if needed
-new_stopwords = stopwords.union(new_words)
-
-# Set figure size
-plt.rcParams["figure.figsize"] = (10, 10)
-
-# Generate and display the word cloud using frequencies
-wordcloud = WordCloud(max_font_size=50, max_words=50, background_color="white", 
-                      stopwords=new_stopwords, colormap="flag").generate_from_frequencies(word_freq)
-plt.imshow(wordcloud, interpolation="bilinear")
+df["word"]=df["word"].astype(str)
+df["frequency"]=pd.to_numeric(df["frequency"])
+word_fre=dict(zip(df["word"],df["frequency"]))
+wordcloud=WordCloud(height=1000,width=1000,background_color="white",stopwords=STOPWORDS,mask=flame_mask, max_words=102).generate_from_frequencies(word_fre)
+plt.figure(figsize=(10,6))
 plt.axis("off")
+plt.imshow(wordcloud,interpolation="bilinear")
 plt.show()
+
